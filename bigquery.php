@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: tuanle
- * Date: 11/10/18
- * Time: 21:16
+ * Date: 11/11/18
+ * Time: 14:52
  */
     session_start();
 
@@ -19,7 +19,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Lecturer Management Information System</title>
+        <title>BigQuery</title>
         <meta charset="utf-8">
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -46,7 +46,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="manage_lecturers.php">Manage lecturers</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="bigquery.php">BigQuery</a>
                 </li>
                 <li class="nav-item">
@@ -57,13 +57,7 @@
             </ul>
         </nav>
         <br>
-        <div class="container-fluid">
-            <h1 class="display-4">Assignment 1 - Build a simple app using Cloud services</h1>
-            <h1>Lecturer: Nguyen Ngoc Thanh</h1>
-            <br>
-            <p>Student name: Le Nguyen Anh Tuan</p>
-            <p>Student ID: s3574983</p>
-        </div>
+
         <br>
         <footer class="page-footer font-small lighten-5"">
             <div class="footer-copyright text-center text-black-50 py-3">
