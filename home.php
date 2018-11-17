@@ -2,8 +2,6 @@
 /**
  * Created by PhpStorm.
  * User: tuanle
- * Date: 11/10/18
- * Time: 21:16
  */
     session_start();
 
@@ -32,6 +30,8 @@
 
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+        <link rel="icon" href="assets/logo.png" type="image/png"
     </head>
     <body>
         <div class="jumpotron-fluid">

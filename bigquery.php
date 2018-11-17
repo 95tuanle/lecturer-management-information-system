@@ -2,8 +2,6 @@
 /**
  * Created by PhpStorm.
  * User: tuanle
- * Date: 11/11/18
- * Time: 14:52
  */
     session_start();
 
@@ -13,6 +11,8 @@
 
     if (!isset($user)) {
         header("Location: login.php");
+    } else {
+        require_once 'php/google-api-php-client/vendor/autoload.php';
     }
 ?>
 
@@ -32,6 +32,8 @@
 
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+        <link rel="icon" href="assets/logo.png" type="image/png"
     </head>
     <body>
         <div class="jumpotron-fluid">
@@ -58,6 +60,47 @@
         </nav>
         <br>
 
+        <div class="container text-dark">
+            <h2>BigQuery of Lecturers</h2>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Gender</th>
+                    <th>Age</th>
+                    <th>Frequency</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                    $client = new Google_Client();
+                    $client->useApplicationDefaultCredentials();
+                    $client->addScope(Google_Service_Bigquery::BIGQUERY);
+                    $bigquery = new Google_Service_Bigquery($client);
+                    $projectId = 's3574983-asm1';
+                    $request = new Google_Service_Bigquery_QueryRequest();
+                    $dataAsArray = file('gs://s3574983-asm1-bucket/lecturers.csv', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+                    for ($position = 0; $position < count($dataAsArray); $position++) {
+                        $fields = explode(",", $dataAsArray[$position]);
+                        $request->setQuery("SELECT name , SUM(count) as freq FROM [baby.baby_names] WHERE name = '$fields[1]' GROUP BY name ORDER BY freq;");
+                        $response = $bigquery->jobs->query($projectId, $request);
+                        $rows = $response->getRows();
+                        $x = $rows[0]['f'][1]['v'];
+                        echo "<tr>";
+                        echo "<td>$fields[0]</td>";
+                        echo "<td>$fields[1]</td>";
+                        echo "<td>$fields[2]</td>";
+                        echo "<td>$fields[3]</td>";
+                        echo "<td>$fields[4]</td>";
+                        echo "<td>$x</td>";
+                        echo "</tr>";
+                    }
+                ?>
+                </tbody>
+            </table>
+        </div>
         <br>
         <footer class="page-footer font-small lighten-5"">
             <div class="footer-copyright text-center text-black-50 py-3">

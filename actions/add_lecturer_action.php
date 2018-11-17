@@ -2,8 +2,6 @@
 /**
  * Created by PhpStorm.
  * User: tuanle
- * Date: 11/11/18
- * Time: 15:53
  */
     session_start();
 
@@ -21,3 +19,4 @@
         fclose($fp);
         header("Location: ../manage_lecturers.php");
     }
+?>
