@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: tuanle
- * Date: 11/11/18
- * Time: 14:52
+ * Date: 11/18/18
+ * Time: 01:54
  */
     session_start();
 
@@ -20,37 +20,59 @@
             $count = 0;
             if (empty($_POST["id"])) {
                 $idErr = "ID is required";
+                $_SESSION['id'] = $_POST['id'];
             } else {
                 $count += 1;
+                $_SESSION['id'] = $_POST['id'];
             }
             if (empty($_POST["fname"])) {
                 $fnameErr = "First name is required";
+                $_SESSION['fname'] = $_POST['fname'];
             } else {
                 $count += 1;
+                $_SESSION['fname'] = $_POST['fname'];
             }
             if (empty($_POST["lname"])) {
                 $lnameErr = "Last name is required";
+                $_SESSION['lname'] = $_POST['lname'];
             } else {
                 $count += 1;
+                $_SESSION['lname'] = $_POST['lname'];
             }
             if (empty($_POST["gender"])) {
                 $genderErr = "Gender is required";
+                $_SESSION['gender'] = $_POST['gender'];
             } else {
                 $count += 1;
+                $_SESSION['gender'] = $_POST['gender'];
             }
             if (empty($_POST["age"])) {
                 $ageErr = "Age is required";
+                $_SESSION['age'] = $_POST['age'];
             } else {
                 $count += 1;
+                $_SESSION['age'] = $_POST['age'];
             }
             if ($count == 5) {
-                $_SESSION['id'] = $_POST['id'];
-                $_SESSION['fname'] = $_POST['fname'];
-                $_SESSION['lname'] = $_POST['lname'];
-                $_SESSION['gender'] = $_POST['gender'];
-                $_SESSION['age'] = $_POST['age'];
-                header("Location: actions/add_lecturer_action.php");
+                header("Location: actions/update_lecturer_action.php");
             }
+        }
+
+        $dataAsArray = file('gs://s3574983-asm1-bucket/lecturers.csv', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        if ($_GET['position'] != null) {
+            $_SESSION['position'] = $_GET['position'];
+            $lecturer = explode(',',$dataAsArray[$_SESSION['position']]);
+            $_SESSION["id"] = $_POST["id"] = $lecturer[0];
+            $_SESSION["fname"] = $_POST["fname"] = $lecturer[1];
+            $_SESSION["lname"] = $_POST["lname"] = $lecturer[2];
+            $_SESSION["gender"] = $_POST["gender"] = $lecturer[3];
+            $_SESSION["age"] = $_POST["age"] = $lecturer[4];
+        } else {
+            $_POST["id"] = $_SESSION["id"];
+            $_POST["fname"] = $_SESSION["fname"];
+            $_POST["lname"] = $_SESSION["lname"];
+            $_POST["gender"] = $_SESSION["gender"];
+            $_POST["age"] = $_SESSION["age"];
         }
     }
 
@@ -60,7 +82,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Add Lecturer</title>
+        <title>Update Lecturer</title>
         <meta charset="utf-8">
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -82,7 +104,7 @@
             <a class="navbar-brand" href="home.php"><img src="assets/logo.png" width="30" height="30"></a>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" href="add_lecturer.php">Add lecturer</a>
+                    <a class="nav-link" href="add_lecturer.php">Add lecturer</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="manage_lecturers.php">Manage lecturers</a>
@@ -123,7 +145,7 @@
                     <input placeholder="Age" class="form-control" type="number" name="age" value="<?php echo isset($_POST['age']) ? $_POST['age'] : '' ?>">
                     <span class="error">* <?php echo $ageErr;?></span>
                 </div>
-                <button type="submit" class="btn btn-primary">Add</button>
+                <button type="submit" class="btn btn-primary">Update</button>
             </form>
         </div>
         <br>

@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: tuanle
- * Date: 11/11/18
- * Time: 15:53
+ * Date: 11/18/18
+ * Time: 01:55
  */
     session_start();
 
@@ -15,7 +15,7 @@
         header("Location: login.php");
     } else {
         $dataAsArray = file('gs://s3574983-asm1-bucket/lecturers.csv', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-        $dataAsArray[count($dataAsArray)] = "{$_SESSION['id']},{$_SESSION['fname']},{$_SESSION['lname']},{$_SESSION['gender']},{$_SESSION['age']}";
+        $dataAsArray[$_SESSION['position']] = "{$_SESSION['id']},{$_SESSION['fname']},{$_SESSION['lname']},{$_SESSION['gender']},{$_SESSION['age']}";
         $fp = fopen('gs://s3574983-asm1-bucket/lecturers.csv', 'w');
         fwrite($fp, implode("\n", $dataAsArray));
         fclose($fp);

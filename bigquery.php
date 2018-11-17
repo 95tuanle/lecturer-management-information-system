@@ -35,10 +35,10 @@
     </head>
     <body>
         <div class="jumpotron-fluid">
-            <img src="assets/images/banner.png" class="img-fluid">
+            <img src="assets/banner.png" class="img-fluid">
         </div>
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top justify-content-center">
-            <a class="navbar-brand" href="home.php"><img src="assets/images/logo.png" width="30" height="30"></a>
+            <a class="navbar-brand" href="home.php"><img src="assets/logo.png" width="30" height="30"></a>
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="add_lecturer.php">Add lecturer</a>

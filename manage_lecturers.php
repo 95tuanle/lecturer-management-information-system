@@ -5,15 +5,15 @@
  * Date: 11/11/18
  * Time: 14:52
  */
-session_start();
+    session_start();
 
-use google\appengine\api\users\User;
-use google\appengine\api\users\UserService;
-$user = UserService::getCurrentUser();
+    use google\appengine\api\users\User;
+    use google\appengine\api\users\UserService;
+    $user = UserService::getCurrentUser();
 
-if (!isset($user)) {
-    header("Location: login.php");
-}
+    if (!isset($user)) {
+        header("Location: login.php");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -35,10 +35,10 @@ if (!isset($user)) {
     </head>
     <body>
         <div class="jumpotron-fluid">
-            <img src="assets/images/banner.png" class="img-fluid">
+            <img src="assets/banner.png" class="img-fluid">
         </div>
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top justify-content-center">
-            <a class="navbar-brand" href="home.php"><img src="assets/images/logo.png" width="30" height="30"></a>
+            <a class="navbar-brand" href="home.php"><img src="assets/logo.png" width="30" height="30"></a>
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="add_lecturer.php">Add lecturer</a>
@@ -57,7 +57,37 @@ if (!isset($user)) {
             </ul>
         </nav>
         <br>
-
+            <div class="container text-dark">
+                <h2>Lecturers</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>First name</th>
+                            <th>Last name</th>
+                            <th>Gender</th>
+                            <th>Age</th>
+                            <th>Update or Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            $dataAsArray = file('gs://s3574983-asm1-bucket/lecturers.csv', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+                            for ($position = 0; $position < count($dataAsArray); $position++) {
+                                $fields = explode(",", $dataAsArray[$position]);
+                                echo "<tr>";
+                                echo "<td>$fields[0]</td>";
+                                echo "<td>$fields[1]</td>";
+                                echo "<td>$fields[2]</td>";
+                                echo "<td>$fields[3]</td>";
+                                echo "<td>$fields[4]</td>";
+                                echo "<td><a type='button' class='btn btn-warning text-dark' href='update_lecturer.php?position=$position'>Update</a><a type='button' class='btn btn-danger text-dark' href='actions/delete_lecturer_action.php?position=$position'>Delete</a></td>";
+                                echo "</tr>";
+                            }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
         <br>
         <footer class="page-footer font-small lighten-5"">
             <div class="footer-copyright text-center text-black-50 py-3">

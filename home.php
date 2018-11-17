@@ -35,10 +35,10 @@
     </head>
     <body>
         <div class="jumpotron-fluid">
-            <img src="assets/images/banner.png" class="img-fluid">
+            <img src="assets/banner.png" class="img-fluid">
         </div>
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top justify-content-center">
-            <a class="navbar-brand" href="home.php"><img src="assets/images/logo.png" width="30" height="30"></a>
+            <a class="navbar-brand" href="home.php"><img src="assets/logo.png" width="30" height="30"></a>
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="add_lecturer.php">Add lecturer</a>
@@ -57,7 +57,7 @@
             </ul>
         </nav>
         <br>
-        <div class="container-fluid">
+        <div class="container">
             <h1 class="display-4">Assignment 1 - Build a simple app using Cloud services</h1>
             <h1>Lecturer: Nguyen Ngoc Thanh</h1>
             <br>
