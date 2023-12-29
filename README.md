@@ -1,4 +1,5 @@
 # Assignment 1 - Build a simple app using Cloud services
+
 Lecturer: Nguyen Ngoc Thanh
 
 Student name: Le Nguyen Anh Tuan
